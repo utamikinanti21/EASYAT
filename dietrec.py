@@ -8,9 +8,9 @@ def Pilihan_Metode():
         print("4. Metode diet untuk IMT >= 30")
         print("0. Balik ke menu awal")
 
-        metode = int(input("Pilih dari 0-4: "))
+        metode = input("Pilih dari 0-4: ")
 
-        if metode == 1:
+        if metode == '1':
             print("""
             Jika IMT anda < 18,5 maka anda termasuk golongan kurus (underweight),
             Kami sarankan untuk menambah berat badan yang sehat dengan cara:
@@ -23,7 +23,7 @@ def Pilihan_Metode():
             7. Istirahat yang cukup dan kurangi stres
             """)
 
-        elif metode == 2:
+        elif metode == '2':
             print("""
             Jika IMT anda berkisar antara 18,5 sampai 24,9, ini adalah berat badan yang normal (healthy).
             Namun kami menyarankan untuk menjaga berat badan agar tetap normal dengan cara:
@@ -34,7 +34,7 @@ def Pilihan_Metode():
             5. Istirahat yang cukup dan kurangi stres
             """)
 
-        elif metode == 3:
+        elif metode == '3':
             print("""
             Jika IMT anda berkisar antara 25 sampai 29,9, Maka anda termasuk golongan gemuk (overweight).
             Kami sarankan untuk menurunkan berat badan anda secara perlahan dengan cara:
@@ -47,7 +47,7 @@ def Pilihan_Metode():
             7. Istirahat yang cukup dan kurangi stres
             """)
 
-        elif metode == 4:
+        elif metode == '4':
             print("""
             Jika IMT anda 30 atau lebih Maka anda termasuk golongan obesitas. 
             Kami sarankan menghubungi dokter ahli sambil menurunkan berat badan 
@@ -62,7 +62,7 @@ def Pilihan_Metode():
             9. Istirahat yang cukup dan kurangi stres
             """)
             
-        elif metode == 0:
+        elif metode == '0':
             break
         else:
             print("\nInvalid! Silahkan memasukkan angka dari 0-4\n")

@@ -1,5 +1,6 @@
 import csv
 import dietrec as dr
+import bmi
 
 file_path = 'data_Akun.csv'
 
@@ -57,18 +58,18 @@ def dashboard(username):
 
         menu = int(input("Pilih dari 0-5: "))
 
-        if menu == 0:
+        if menu == '0':
             print("\nSelamat Tinggal! Semoga Harimu Menyenangkan! ^_^ ")
             break
-        elif menu == 1:
-            import bmi # file bmi.py
-        elif menu == 2:
+        elif menu == '1':
+            bmi.kalkulator_bmi() # file bmi.py
+        elif menu == '2':
             dr.Pilihan_Metode()# file dietrec.py
-        elif menu == 3:
+        elif menu == '3':
             pass # file reseppage.py
-        elif menu == 4:
+        elif menu == '4':
             pass # file calorytrack.py
-        elif menu == 5: #optional
+        elif menu == '5': #optional
             pass # optional
         else:
             print("\nInvalid! Silahkan memasukkan angka dari 0-5\n")
@@ -84,9 +85,9 @@ def signup_login():
         print("2. Login")
         print("0. Keluar")
 
-        pilihan = int(input("Pilih 1, 2, atau 0: "))
+        pilihan = input("Pilih 1, 2, atau 0: ")
 
-        if pilihan == 1:
+        if pilihan == '1':
             while True:
                 username_input = input("Buat Username: ")
                 password_input = input("Buat Password: ")
@@ -95,7 +96,7 @@ def signup_login():
                 if cek_hasil:
                     break
 
-        elif pilihan == 2:
+        elif pilihan == '2':
             num = 0
             while num != 3:
                 username_input = input("Username: ")
@@ -113,7 +114,7 @@ def signup_login():
                 dashboard(user)
                 break
                     
-        elif pilihan == 3:
+        elif pilihan == '3':
             print("Selamat Tinggal! Semoga Harimu Menyenangkan! ^_^ ")
             break
         else:
