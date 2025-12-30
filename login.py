@@ -3,6 +3,8 @@ import dietrec as dr
 import bmi
 import resep
 import calorytrack as ct
+import profil
+import pandas as pd
 
 file_path = 'data_Akun.csv'
 
@@ -55,7 +57,7 @@ def dashboard(username):
         print("2. Rekomendasi Diet")
         print("3. Resep-resep")
         print("4. Calory Tracking")
-        print("5. Profile User") # optional
+        print("5. Profile User")
         print("0. Keluar")
 
         menu = input("Pilih dari 0-5: ")
@@ -73,12 +75,14 @@ def dashboard(username):
         elif menu == '3':
             resep.menu() # file reseppage.py
             
-
         elif menu == '4':
             ct.menu(user=username) # file calorytrack.py
 
         elif menu == '5':
-            pass
+            if profil.cek(username) == True:
+                profil.profile(username)
+            else:
+                profil.create_profile(username)
 
         else:
             print("\nInvalid! Silahkan memasukkan angka dari 0-5\n")
@@ -100,7 +104,7 @@ def signup_login():
             while True:
                 username_input = input("Buat Username: ")
                 password_input = input("Buat Password: ")
-                cek_hasil = signup(username_input, password_input)
+                cek_hasil      = signup(username_input, password_input)
 
                 if cek_hasil:
                     break
@@ -110,7 +114,7 @@ def signup_login():
             while num != 3:
                 username_input = input("Username: ")
                 password_input = input("Password: ")
-                cek_login = login(username_input, password_input)
+                cek_login      = login(username_input, password_input)
                 if cek_login:
                     user = username_input
                     break

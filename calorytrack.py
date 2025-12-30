@@ -52,7 +52,7 @@ def Isi_catatan(user):
 
     while True:
         makanan_user = input("Makanan: ").lower()
-        if (makanan_user or berat_makanan) == 'sudah':
+        if makanan_user == 'sudah':
             break
         berat_makanan = float(input("Berat (gram): "))
 
@@ -115,6 +115,9 @@ def menu(user):
 
         elif pilih == '2':
             lihat_catatan(user)
-        
+
         elif pilih == '0':
             break
+        
+        else:
+            print("Pilihan anda tidak valid! Silahkan masukkan angka 1, 2, atau 0")
