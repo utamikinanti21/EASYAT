@@ -44,14 +44,19 @@ def cek(username):
 
 def profile(username):
     df = pd.read_csv(file_path)
-    profileUser = df.where(df['Username'] == username).dropna().reset_index(drop=True)
-    print(profileUser)
-    nama    = profileUser.loc[0,'Username']
-    imt     = profileUser.loc[0,'IMT']
-    berat   = profileUser.loc[0,'BeratBadan']
-    tinggi  = profileUser.loc[0,'TinggiBadan']
-    usia    = profileUser.loc[0,'Usia']
-    sex     = profileUser.loc[0,'JenisKelamin']
+    nama   = df.loc[df['Username'] == username,'Username']
+    imt    = df.loc[df['Username'] == username,'IMT']
+    berat  = df.loc[df['Username'] == username,'BeratBadan']
+    tinggi = df.loc[df['Username'] == username,'TinggiBadan']
+    usia   = df.loc[df['Username'] == username,'Usia']
+    sex    = df.loc[df['Username'] == username,'JenisKelamin']
+
+    nama  : str   = nama.iloc[0]
+    imt   : float = imt.iloc[0]
+    berat : float = berat.iloc[0]
+    tinggi: float = tinggi.iloc[0]
+    usia  : int   = usia.iloc[0]
+    sex   : str   = sex.iloc[0]
 
     print("\n======= Profile =======")
     print(f"""Username     : {nama}
@@ -69,12 +74,15 @@ Jenis Kelamin: {sex}""")
             break
 
         elif menu == '1':
-            usia = int(input('Masukkan usia anda pada saat ini: '))
-            imt, berat, tinggi = bmi.kalkulator_bmi()
+            usia_baru = int(input('Masukkan usia anda pada saat ini: '))
+            imt_baru, berat_baru, tinggi_baru = bmi.kalkulator_bmi()
+            df.loc[df['Username'] == username, 'IMT']        = imt_baru
+            df.loc[df['Username'] == username,'BeratBadan']  = berat_baru
+            df.loc[df['Username'] == username,'TinggiBadan'] = tinggi_baru
+            df.loc[df['Username'] == username,'Usia']        = usia_baru
 
-            profileUser.loc[0,'IMT']         = imt
-            profileUser.loc[0,'BeratBadan']  = berat
-            profileUser.loc[0,'TinggiBadan'] = tinggi
-            profileUser.loc[0,'Usia']        = usia
+            df.to_csv(file_path, index=False)
 
-            print("Profile anda sudah berhasil di Update! Silahkan kembali ke Dashboard")
+            print("Profile anda sudah berhasil di Update! Anda akan kembali ke Dashboard")
+        else:
+            print("Silahkan masukkan angka 1 atau 0!")
