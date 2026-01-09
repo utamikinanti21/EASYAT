@@ -1,36 +1,54 @@
-Makanan,Kalori
+makanan,kalori
 alpukat,322
 anggur,69
 apel,72
+asparagus,20
 bakso sapi,202
 bebek goreng,286
+brokoli,55
 buah naga,50
+cheeseburger,303
 chicken nugget,297
 dada ayam goreng,216
+hamburger,250
 ikan kembung,167
 ikan lele goreng,105
 ikan lele panggang,184
 ikan salmon panggang,171
+jagung,96
 jambu air,55
 jambu biji,37
 jeruk,62
+kentang,77
 kentang rebus,87
 mangga manalagi,72
 manggis,73
 melon,34
+mentega,717
+mentimun,16
 mie goreng instan,350
+nanas,50
+nasi,130
 nasi merah,110
 nasi putih,175
 pepaya,39
 perkedel kentang,117
+persik,39
 pisang,105
+pizza,266
 roti gandum,67
 roti putih,66
+salad caesar,44
 salak,8
 sambal goreng kentang,107
+sandwich,200
+sari apel,50
+selada,15
 semangka,30
 singkong,160
 spagetti,157
+stroberi,32
+tahu,76
 tahu bacem,119
 tahu bakso,119
 tahu isi,124
@@ -41,49 +59,11 @@ telur orak arik,199
 telur rebus,68
 tempe bacem,157
 tempe goreng,118
+tomat,18
 tumis kacang panjang,102
 tumis kangkung,155
 tumis labu siam,106
 ubi jalar,86
 udang goreng tepung,150
-yogurt,63
-apel,100
-pisang,52
-anggur,69
-jeruk,47
-pir,57
-persik,39
-nanas,50
-stroberi,32
-semangka,30
-asparagus,20
-brokoli,55
-wortel,41
-mentimun,16
-terong,25
-selada,15
-tomat,18
-tomat,18
-tahu,76
-telur,155
-roti putih,265
-mentega,717
-salad caesar,44
-cheeseburger,303
-hamburger,250
-cokelat hitam,546
-jagung,96
-pizza,266
-kentang,77
-nasi,130
-sandwich,200
-bir,43
-coca-cola classic,42
-diet coke,1
-susu 1%,42
-susu 2%,50
-susu full cream,60
-jus jeruk,45
-sari apel,50
 yogurt rendah lemak,63
 yogurt tanpa lemak,59
