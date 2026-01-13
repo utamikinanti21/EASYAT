@@ -110,12 +110,27 @@ def lihat_catatan(user):
     else:
         print("\nSepertinya kamu belum membuat catatan! Isi terlebih catatan kamu\n")
 
+def Cari_makanan(cari):
+    with open(file_data, 'r') as file: 
+        datanya = csv.DictReader(file)
+        ketemu = "no"      
+        for line in datanya:
+            if cari == line["makanan"] :
+                print(f"Nama makanan: {line["makanan"]}") 
+                print(f"Total Kalori: {line["kalori"]} kalori per 100 gram\n")
+                ketemu = "yes"
+                break
+                     
+    if ketemu == "no" :
+        print(f"Nama makanan {cari} tidak ditemukan\n")
+
 def menu(user):
     while True:
         print("1. Isi catatan")
         print("2. Lihat catatan")
+        print("3. Cari Makanan")
         print("0. Kembali")
-        pilih = input("Pilih 1, 2, atau 0: ")
+        pilih = input("Pilih 1, 2, 3, atau 0: ")
 
         if pilih == '1':
             while True:
@@ -127,8 +142,12 @@ def menu(user):
         elif pilih == '2':
             lihat_catatan(user)
 
+        elif pilih == '3':
+            cari = input("Masukkan nama makanan yang dicari: ").lower()
+            Cari_makanan(cari)
+            
         elif pilih == '0':
             break
         
         else:
-            print("Pilihan anda tidak valid! Silahkan masukkan angka 1, 2, atau 0")
+            print("Pilihan anda tidak valid! Silahkan masukkan angka 1, 2, 3, atau 0")
