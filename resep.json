@@ -1,0 +1,18 @@
+[
+    {
+        "nama": "Bakso Goreng",
+        "bahan": "Daging, Tepung, Air, Penyedap makanan, Garam, Merica",
+        "langkah": "Cincang daging, campurkan dengan tepung dan aduk, bentuk bakso menjadi bulat, kukus bakso sampe baksonya mengambang, goreng bakso hingga matang",
+        "kalori": "150",
+        "gizi": "Protein, Vitamin B",
+        "pembuat": "Pengguna"
+    },
+    {
+        "nama": "Salad Buah",
+        "bahan": "Apel, Mangga, Jeruk, Anggur, Mayonaise",
+        "langkah": "Potong buah kecil-kecil, lalu campurkan dengan mayonaise",
+        "kalori": "98",
+        "gizi": "Vitamin B, Vitamin C",
+        "pembuat": "Pengguna"
+    }
+]
