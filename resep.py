@@ -87,7 +87,10 @@ def cari_resep():
     hasil = []
 
     for r in resep:
-        if keyword in r['nama'].lower():
+        if (keyword in r['nama'].lower() or
+            keyword in r['bahan'].lower() or
+            keyword in r['langkah'].lower() or
+            keyword in r['gizi'].lower()):
             hasil.append(r)
 
     if not hasil:
