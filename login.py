@@ -5,6 +5,7 @@ import resep
 import calorytrack as ct
 import profil
 import pandas as pd
+import os
 
 file_path = 'data_Akun.csv'
 
@@ -33,35 +34,36 @@ def signup(username, password):
 def admin_site():
     while True:
         
-        print('Dashboard Admin')
+        print('\n====Dashboard Admin====')
         print('1. lihat profile user')
         print('2. menambah resep')
         print('0. Keluar')
-        menu = input('->')
+        menu = input('-> ')
         
         if menu == '0':
+            print('====Dashboard Admin====\n')
             break
         elif menu == '1':
-            
-            with open('data_profile.csv', 'r') as file:
-                membaca_data = csv.reader(file)
-                num = 0
-                for i in membaca_data:  #diubah menjadi list
-                                
-                    if len(i) == 0: #cek agar tidak ada index error
-                        num += 1
-                    else:
-                        num = 0
-                        
-                if num == 1:
-                    print('belum ada profile di data profile')          
-                else:
-                    data = pd.read_csv('data_profile.csv')
-                    print(data)
+            if os.path.exists('data_profile.csv'):
+                with open('data_profile.csv', 'r') as file:
+                    membaca_data = csv.reader(file)
+                    num = 0
+                    for i in membaca_data:  #diubah menjadi list                                    
+                        if len(i) == 0: #cek agar tidak ada index error
+                            num += 1
+                        else:
+                            num = 0                            
+                        if num == 1:
+                            print('\nbelum ada profile di data profile')          
+                        else:
+                            data = pd.read_csv('data_profile.csv')
+                            print(f'\n{data}')
+            else:
+                print('\nbelum ada profile di data profile')
         elif menu == '2':
             resep.tambah_resep()
         else:
-            print('invalid')
+            print('\ninvalid')
     return True
 
 def login(username, password):
@@ -141,7 +143,16 @@ def signup_login():
             while True:
                 username_input = input("Buat Username: ")
                 password_input = input("Buat Password: ")
-                cek_hasil      = signup(username_input, password_input)
+                if os.path.exists(file_path):
+                    cek_hasil = signup(username_input, password_input)
+                else:
+                    with open(file_path, 'w') as file:
+                        menulis_data = csv.DictWriter(file, fieldnames=['Username', 'Password'])
+                        menulis_data.writerow({
+                            'Username': 'Admin',
+                            'Password': 'Festor771'
+                        })
+                    cek_hasil = signup(username_input, password_input)
 
                 if cek_hasil:
                     break
@@ -151,7 +162,17 @@ def signup_login():
             while num != 3:
                 username_input = input("Username: ")
                 password_input = input("Password: ")
-                cek_login, admin      = login(username_input, password_input)
+                if os.path.exists(file_path):
+                    cek_login, admin = login(username_input, password_input)
+                else:
+                    with open(file_path, 'w') as file:
+                        menulis_data = csv.DictWriter(file, fieldnames=['Username', 'Password'])
+                        menulis_data.writerow({
+                            'Username': 'Admin',
+                            'Password': 'Festor771'
+                        })
+                    cek_login, admin = login(username_input, password_input)   
+
                 if admin:
                     break
                 if cek_login:
