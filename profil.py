@@ -1,5 +1,6 @@
 import pandas as pd
 import bmi
+from datetime import datetime
 
 file_path = 'data_profile.csv'
 def create_profile(username):
@@ -68,6 +69,7 @@ Jenis Kelamin: {sex}""")
     print("======= Profile =======\n")
     while True:
         print("1. Update Profile")
+        print("2. Lihat Progress Diet")
         print("0. Kembali")
         menu = input("-> ")
         if menu == '0':
@@ -82,7 +84,75 @@ Jenis Kelamin: {sex}""")
             df.loc[df['Username'] == username,'Usia']        = usia_baru
 
             df.to_csv(file_path, index=False)
+            add_history(username, berat_baru)
+
+        elif menu == '2':
+            history_berat(username)
+
 
             print("Profile anda sudah berhasil di Update! Anda akan kembali ke Dashboard")
         else:
             print("Silahkan masukkan angka 1 atau 0!")
+
+
+#fungsi untuk menambah histori berat badan
+
+
+history_file = "history_berat.csv"
+
+import os
+
+def add_history(username, berat_badan):
+    tanggal = datetime.now().strftime("%d-%m-%Y")
+
+    data = {
+        "Username": [username],
+        "Tanggal": [tanggal],
+        "BeratBadan": [berat_badan]
+    }
+
+    df = pd.DataFrame(data)
+
+    if not os.path.exists(history_file):
+        df.to_csv(history_file, index=False)
+    else:
+        df.to_csv(history_file, mode="a", index=False, header=False)
+
+
+
+#fungsi untuk melihat histori dan total naik/turun
+
+def history_berat(username):
+    try:
+        df = pd.read_csv(history_file)
+    except FileNotFoundError:
+        print("Belum ada histori berat badan.")
+        return
+    
+    user_history = df[df["Username"] == username]
+
+    if user_history.empty:
+        print("Belum ada histori berat badan untuk user ini.")
+        return
+    
+    print("\n======= History Berat Badan =======")
+    for _, row in user_history.iterrows():
+        print(f"{row['Tanggal']} | {row['BeratBadan']} kg")
+
+    
+    berat_awal = user_history.iloc[0]["BeratBadan"]
+    berat_akhir = user_history.iloc[-1]["BeratBadan"]
+    perubahan = berat_akhir - berat_awal
+
+    print("\n======= Ringkasan =======")
+    print(f"Berat awal : {berat_awal} kg")
+    print(f"Berat terakhir: {berat_akhir} kg")
+
+    if perubahan < 0:
+        print(f"Total perubahan: {perubahan} kg (Turun, yey)")
+    elif perubahan > 0:
+        print(f"Total perubahan: +{perubahan} kg (Naik, yaahh)")
+    else:
+        print("Total perubahan: 0 kg (Stabil)")
+
+    print("=======================================\n")

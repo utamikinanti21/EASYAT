@@ -94,7 +94,7 @@ def dashboard(username):
     while True:
         print("Menu: ")
         print("1. Hitung BMI (Body Mass Index)")
-        print("2. Rekomendasi Diet")
+        print("2. Lihat Metode Diet")
         print("3. Resep-resep")
         print("4. Calory Tracking")
         print("5. Profile User")
