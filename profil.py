@@ -3,6 +3,22 @@ import bmi
 from datetime import datetime
 
 file_path = 'data_profile.csv'
+
+def hitung_bmi():
+    print("=== Kalkulator BMI ===")
+    while True:
+        berat = float(input("Masukkan berat badan (kg): "))
+        tinggi = float(input("Masukkan tinggi badan (cm): "))
+
+        if (berat <= 0) or (tinggi <= 0) : 
+            print("Input Tidak valid. Berat dan tinggi harus lebih dari 0.")
+        else:
+            break
+        
+    tinggi_m = tinggi / 100
+    bmi = berat / (tinggi_m ** 2)
+    return bmi, berat, tinggi
+
 def create_profile(username):
     print("\n======= Create Profile =======")
     usia = int(input("Silahkan masukkan usia anda: "))
@@ -19,7 +35,10 @@ def create_profile(username):
             break
         else:
             print("\nSilahkan masukkan angka 1 atau 2!")
-    imt, beratBdn, tinggiBdn = bmi.kalkulator_bmi()
+
+    
+
+    imt, beratBdn, tinggiBdn = hitung_bmi()
     data = {
         'Username'      : [username], #dilist biar tidak ada value error
         'IMT'           : [imt],
@@ -30,18 +49,24 @@ def create_profile(username):
     }
 
     df = pd.DataFrame(data)
-    df.to_csv(file_path, mode= 'a', index=False, header=False)
+    if os.path.exists(file_path):
+        df.to_csv(file_path, mode= 'a', index=False, header=False)
+    else:
+        df.to_csv(file_path, index=False)
 
     print("Profil anda berhasil dibuat! Silahkan kembali ke Dashboard")
     print("======= Create Profile =======\n")
 
 def cek(username):
-    df = pd.read_csv(file_path)
-    df = df['Username']
-    for i in df:
-        if i == username:
-            return True
-    return False
+    if os.path.exists(file_path):
+        df = pd.read_csv(file_path)
+        df = df['Username']
+        for i in df:
+            if i == username:
+                return True
+        return False
+    else:
+        return False
 
 def profile(username):
     df = pd.read_csv(file_path)
@@ -61,10 +86,10 @@ def profile(username):
 
     print("\n======= Profile =======")
     print(f"""Username     : {nama}
-IMT          : {imt}
-Berat Badan  : {berat}
-Tinggi Badan : {tinggi}
-Usia         : {usia}
+IMT          : {round(imt, 2)}
+Berat Badan  : {round(berat, 2)} kg
+Tinggi Badan : {round(tinggi, 2)} cm
+Usia         : {usia} Tahun
 Jenis Kelamin: {sex}""")
     print("======= Profile =======\n")
     while True:
@@ -77,8 +102,8 @@ Jenis Kelamin: {sex}""")
 
         elif menu == '1':
             usia_baru = int(input('Masukkan usia anda pada saat ini: '))
-            imt_baru, berat_baru, tinggi_baru = bmi.kalkulator_bmi()
-            df.loc[df['Username'] == username, 'IMT']        = imt_baru
+            imt_baru, berat_baru, tinggi_baru = hitung_bmi()
+            df.loc[df['Username'] == username,'IMT']         = imt_baru
             df.loc[df['Username'] == username,'BeratBadan']  = berat_baru
             df.loc[df['Username'] == username,'TinggiBadan'] = tinggi_baru
             df.loc[df['Username'] == username,'Usia']        = usia_baru

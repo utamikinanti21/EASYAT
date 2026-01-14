@@ -95,5 +95,3 @@ def kalkulator_bmi():
     print("Metode diet yang direkomendasikan: ", metode)
         
     return bmi, berat, tinggi, metode
-
-kalkulator_bmi()
