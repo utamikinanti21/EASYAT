@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 
 data_Akun.csv
+*.env
 data_profile.csv
 history_berat.csv
 

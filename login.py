@@ -37,13 +37,30 @@ def admin_site():
         print('\n====Dashboard Admin====')
         print('1. lihat profile user')
         print('2. menambah resep')
+        print('3. Cari resep')
         print('0. Keluar')
-        menu = input('-> ')
+        menu = input('->')
         
         if menu == '0':
             print('====Dashboard Admin====\n')
             break
         elif menu == '1':
+
+            with open('data_profile.csv', 'r') as file:
+                membaca_data = csv.reader(file)
+                num = 0
+                for i in membaca_data:  #diubah menjadi list
+
+                    if len(i) == 0: #cek agar tidak ada index error
+                        num += 1
+                    else:
+                        num = 0
+
+                if num == 1:
+                    print('belum ada profile di data profile')
+                else:
+                    data = pd.read_csv('data_profile.csv')
+                    print(data)
             if os.path.exists('data_profile.csv'):
                 with open('data_profile.csv', 'r') as file:
                     membaca_data = csv.reader(file)
@@ -62,6 +79,8 @@ def admin_site():
                 print('\nbelum ada profile di data profile')
         elif menu == '2':
             resep.tambah_resep()
+        elif menu == '3':
+            resep.cari_resep()
         else:
             print('\ninvalid')
     return True

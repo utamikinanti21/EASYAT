@@ -77,6 +77,48 @@ def tambah_resep():
 
     print("\nResep berhasil ditambahkan!\n")
 
+def cari_resep():
+    resep = load_resep()
+    if not resep:
+        print("\nBelum ada resep makanan sehat.\n")
+        return
+
+    keyword = input("Masukkan kata kunci pencarian: ").lower()
+    hasil = []
+
+    for r in resep:
+        if (keyword in r['nama'].lower() or
+            keyword in r['bahan'].lower() or
+            keyword in r['langkah'].lower() or
+            keyword in r['gizi'].lower()):
+            hasil.append(r)
+
+    if not hasil:
+        print("\nTidak ada resep yang cocok dengan kata kunci tersebut.\n")
+        return
+
+    print(f"\n=== HASIL PENCARIAN RESEP ({len(hasil)} ditemukan) ===")
+    for i, r in enumerate(hasil, start=1):
+        print(f"{i}. {r['nama']} | {r['kalori']} kal")
+    print()
+
+    try:
+        pilihan = int(input("Pilih nomor resep untuk melihat detail (atau 0 untuk kembali): ")) - 1
+        if pilihan == -1:
+            return
+        r = hasil[pilihan]
+
+        print("\n--- DETAIL RESEP SEHAT ---")
+        print("Nama Resep     :", r["nama"])
+        print("Bahan          :", r["bahan"])
+        print("Langkah        :", r["langkah"])
+        print("Jumlah Kalori  :", r["kalori"])
+        print("Informasi Gizi :", r["gizi"])
+        print("Pembuat        :", r["pembuat"])
+        print()
+    except:
+        print("Input tidak valid.\n")
+
 # =========================
 # MENU UTAMA
 # =========================
@@ -86,7 +128,8 @@ def menu():
         print("===== DIET HELPER =====")
         print("1. Lihat Resep Makanan Sehat")
         print("2. Lihat Detail Resep")
-        print("3. Keluar")
+        print("3. Cari Resep")
+        print("4. Keluar")
 
         pilihan = input("Pilih menu: ")
 
@@ -95,6 +138,8 @@ def menu():
         elif pilihan == "2":
             detail_resep()
         elif pilihan == "3":
+            cari_resep()
+        elif pilihan == "4":
             print("Terima kasih telah menggunakan Diet Helper.")
             break
         else:
